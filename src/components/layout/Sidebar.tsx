@@ -2,12 +2,9 @@
 import React, { useState } from 'react';
 import { 
   HomeIcon, 
-  Building2Icon, 
-  Users2Icon,
-
-  CalendarIcon, 
-  ListTodoIcon, 
-  FileTextIcon, 
+  FilePlusIcon, 
+  FileMinusIcon,
+  ImageIcon, 
   SettingsIcon,
   MenuIcon,
   XIcon
@@ -42,7 +39,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon: Icon, label, active, on
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [activeItem, setActiveItem] = useState('Alojamientos');
+  const [activeItem, setActiveItem] = useState('Inicio');
 
   const handleItemClick = (item: string) => {
     setActiveItem(item);
@@ -56,7 +53,7 @@ const Sidebar = () => {
       )}
     >
       <div className="flex h-16 items-center justify-between border-b px-4">
-        {!collapsed && <span className="text-lg font-semibold">Dashboard</span>}
+        {!collapsed && <span className="text-lg font-semibold">Inicio</span>}
         <Button
           variant="ghost"
           size="icon"
@@ -72,39 +69,27 @@ const Sidebar = () => {
             <>
               <SidebarItem
                 icon={HomeIcon}
-                label="Dashboard"
-                active={activeItem === 'Dashboard'}
-                onClick={() => handleItemClick('Dashboard')}
+                label="Inicio"
+                active={activeItem === 'Inicio'}
+                onClick={() => handleItemClick('Inicio')}
               />
               <SidebarItem
-                icon={Building2Icon}
-                label="Alojamientos"
-                active={activeItem === 'Alojamientos'}
-                onClick={() => handleItemClick('Alojamientos')}
+                icon={FilePlusIcon}
+                label="Alta Alojamientos"
+                active={activeItem === 'Alta Alojamientos'}
+                onClick={() => handleItemClick('Alta Alojamientos')}
               />
               <SidebarItem
-                icon={Users2Icon}
-                label="Titulares"
-                active={activeItem === 'Titulares'}
-                onClick={() => handleItemClick('Titulares')}
+                icon={FileMinusIcon}
+                label="Baja Alojamientos"
+                active={activeItem === 'Baja Alojamientos'}
+                onClick={() => handleItemClick('Baja Alojamientos')}
               />
               <SidebarItem
-                icon={CalendarIcon}
-                label="Calendario"
-                active={activeItem === 'Calendario'}
-                onClick={() => handleItemClick('Calendario')}
-              />
-              <SidebarItem
-                icon={ListTodoIcon}
-                label="Inspecciones"
-                active={activeItem === 'Inspecciones'}
-                onClick={() => handleItemClick('Inspecciones')}
-              />
-              <SidebarItem
-                icon={FileTextIcon}
-                label="Informes"
-                active={activeItem === 'Informes'}
-                onClick={() => handleItemClick('Informes')}
+                icon={ImageIcon}
+                label="Muestras"
+                active={activeItem === 'Muestras'}
+                onClick={() => handleItemClick('Muestras')}
               />
               <SidebarItem
                 icon={SettingsIcon}
@@ -119,9 +104,9 @@ const Sidebar = () => {
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
-                  activeItem === 'Dashboard' && "bg-sidebar-accent text-sidebar-accent-foreground"
+                  activeItem === 'Inicio' && "bg-sidebar-accent text-sidebar-accent-foreground"
                 )}
-                onClick={() => handleItemClick('Dashboard')}
+                onClick={() => handleItemClick('Inicio')}
               >
                 <HomeIcon size={18} />
               </Button>
@@ -129,51 +114,31 @@ const Sidebar = () => {
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
-                  activeItem === 'Alojamientos' && "bg-sidebar-accent text-sidebar-accent-foreground"
+                  activeItem === 'Alta Alojamientos' && "bg-sidebar-accent text-sidebar-accent-foreground"
                 )}
-                onClick={() => handleItemClick('Alojamientos')}
+                onClick={() => handleItemClick('Alta Alojamientos')}
               >
-                <Building2Icon size={18} />
+                <FilePlusIcon size={18} />
               </Button>
               <Button
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
-                  activeItem === 'Titulares' && "bg-sidebar-accent text-sidebar-accent-foreground"
+                  activeItem === 'Baja Alojamientos' && "bg-sidebar-accent text-sidebar-accent-foreground"
                 )}
-                onClick={() => handleItemClick('Titulares')}
+                onClick={() => handleItemClick('Baja Alojamientos')}
               >
-                <Users2Icon size={18} />
+                <FileMinusIcon size={18} />
               </Button>
               <Button
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
-                  activeItem === 'Calendario' && "bg-sidebar-accent text-sidebar-accent-foreground"
+                  activeItem === 'Muestras' && "bg-sidebar-accent text-sidebar-accent-foreground"
                 )}
-                onClick={() => handleItemClick('Calendario')}
+                onClick={() => handleItemClick('Muestras')}
               >
-                <CalendarIcon size={18} />
-              </Button>
-              <Button
-                variant="ghost"
-                className={cn(
-                  "h-10 w-10 p-0",
-                  activeItem === 'Inspecciones' && "bg-sidebar-accent text-sidebar-accent-foreground"
-                )}
-                onClick={() => handleItemClick('Inspecciones')}
-              >
-                <ListTodoIcon size={18} />
-              </Button>
-              <Button
-                variant="ghost"
-                className={cn(
-                  "h-10 w-10 p-0",
-                  activeItem === 'Informes' && "bg-sidebar-accent text-sidebar-accent-foreground"
-                )}
-                onClick={() => handleItemClick('Informes')}
-              >
-                <FileTextIcon size={18} />
+                <ImageIcon size={18} />
               </Button>
               <Button
                 variant="ghost"
