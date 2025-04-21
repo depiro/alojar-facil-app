@@ -20,6 +20,7 @@ import { toast } from '@/components/ui/sonner';
 import GeneralDataForm from './GeneralDataForm';
 import ServicesForm from './ServicesForm';
 import RepatForm from './RepatForm';
+import RatesForm from './RatesForm';
 import { ClipboardCheckIcon, SaveIcon } from 'lucide-react';
 
 const AccommodationForm = () => {
@@ -45,12 +46,16 @@ const AccommodationForm = () => {
     if (activeTab === 'general') {
       setActiveTab('services');
     } else if (activeTab === 'services') {
+      setActiveTab('rates');
+    } else if (activeTab === 'rates') {
       setActiveTab('repat');
     }
   };
 
   const prevTab = () => {
     if (activeTab === 'repat') {
+      setActiveTab('rates');
+    } else if (activeTab === 'rates') {
       setActiveTab('services');
     } else if (activeTab === 'services') {
       setActiveTab('general');
@@ -74,9 +79,10 @@ const AccommodationForm = () => {
           </CardHeader>
           <CardContent className="p-6">
             <Tabs value={activeTab} onValueChange={handleTabChange}>
-              <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsList className="grid w-full grid-cols-4 mb-8">
                 <TabsTrigger value="general">Datos Generales</TabsTrigger>
                 <TabsTrigger value="services">Servicios</TabsTrigger>
+                <TabsTrigger value="rates">Tarifas</TabsTrigger>
                 <TabsTrigger value="repat">Repat</TabsTrigger>
               </TabsList>
               <TabsContent value="general">
@@ -84,6 +90,9 @@ const AccommodationForm = () => {
               </TabsContent>
               <TabsContent value="services">
                 <ServicesForm />
+              </TabsContent>
+              <TabsContent value="rates">
+                <RatesForm />
               </TabsContent>
               <TabsContent value="repat">
                 <RepatForm />
