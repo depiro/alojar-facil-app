@@ -16,7 +16,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { 
   CreditCardIcon, 
   CarIcon, 
-  SwimmingPoolIcon, 
+  Bath, // Replaced SwimmingPoolIcon with Bath
   HeartPulseIcon, 
   DumbbellIcon, 
   WifiIcon, 
@@ -94,7 +94,7 @@ const ServicesForm = () => {
         {/* Piscina */}
         <div className="form-group">
           <Label className="form-label flex items-center gap-2">
-            <SwimmingPoolIcon size={16} />
+            <Bath size={16} /> {/* Changed to Bath icon */}
             Piscina
           </Label>
           <Select defaultValue={pool} onValueChange={(value) => setValue('services.pool', value)}>
