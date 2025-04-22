@@ -65,9 +65,9 @@ const AccommodationForm = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Card className="w-full">
-          <CardHeader className="bg-gray-50 border-b">
-            <div className="flex items-center">
+        <Card className="w-full max-w-3xl mx-auto sm:p-0 p-2">
+          <CardHeader className="bg-gray-50 border-b px-4 py-4 sm:px-6 sm:py-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2">
               <ClipboardCheckIcon className="h-6 w-6 mr-2 text-primary" />
               <div>
                 <CardTitle className="text-2xl">Creación de Alojamiento</CardTitle>
@@ -77,9 +77,9 @@ const AccommodationForm = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent className="p-2 sm:p-6">
             <Tabs value={activeTab} onValueChange={handleTabChange}>
-              <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-6 sm:mb-8">
                 <TabsTrigger value="general">Datos Generales</TabsTrigger>
                 <TabsTrigger value="services">Servicios</TabsTrigger>
                 <TabsTrigger value="rates">Tarifas</TabsTrigger>
@@ -99,23 +99,25 @@ const AccommodationForm = () => {
               </TabsContent>
             </Tabs>
           </CardContent>
-          <CardFooter className="flex justify-between border-t p-6 bg-gray-50">
-            <div>
+          <CardFooter className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-between border-t p-2 sm:p-6 bg-gray-50">
+            <div className="w-full sm:w-auto">
               {activeTab !== 'general' && (
                 <Button 
                   type="button" 
                   variant="outline" 
                   onClick={prevTab}
+                  className="w-full sm:w-auto"
                 >
                   Anterior
                 </Button>
               )}
             </div>
-            <div className="flex gap-2">
+            <div className="w-full flex flex-col-reverse gap-2 sm:flex-row sm:w-auto sm:gap-2">
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={() => methods.reset()}
+                className="w-full sm:w-auto"
               >
                 Restablecer
               </Button>
@@ -123,13 +125,14 @@ const AccommodationForm = () => {
                 <Button 
                   type="button" 
                   onClick={nextTab}
+                  className="w-full sm:w-auto"
                 >
                   Siguiente
                 </Button>
               ) : (
                 <Button 
                   type="submit" 
-                  className="bg-primary hover:bg-primary/90"
+                  className="w-full sm:w-auto bg-primary hover:bg-primary/90"
                 >
                   <SaveIcon className="mr-2 h-4 w-4" />
                   Guardar
