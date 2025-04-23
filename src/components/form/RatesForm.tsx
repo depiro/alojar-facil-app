@@ -55,21 +55,6 @@ const RatesForm = () => {
         </div>
 
         <div className="p-0">
-          <div className="grid grid-cols-4">
-            <button className="p-4 text-center hover:bg-gray-50 border-b-2 border-primary font-medium text-primary">
-              Temporada Regular
-            </button>
-            <button className="p-4 text-center hover:bg-gray-50 text-gray-500">
-              Temporada Alta
-            </button>
-            <button className="p-4 text-center hover:bg-gray-50 text-gray-500">
-              Promociones
-            </button>
-            <button className="p-4 text-center hover:bg-gray-50 text-gray-500">
-              Histórico
-            </button>
-          </div>
-
           <Table>
             <TableHeader>
               <TableRow>
