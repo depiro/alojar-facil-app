@@ -1,13 +1,9 @@
-
 import React, { useState } from 'react';
 import { useForm, FormProvider } from "react-hook-form";
 import { 
   Card, 
   CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
+  CardFooter
 } from '@/components/ui/card';
 import { 
   Tabs, 
@@ -75,17 +71,6 @@ const AccommodationForm = () => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Card className="w-full">
-          <CardHeader className="bg-gray-50 border-b">
-            <div className="flex items-center">
-              <ClipboardCheckIcon className="h-6 w-6 mr-2 text-primary" />
-              <div>
-                <CardTitle className="text-2xl">Creación de Alojamiento</CardTitle>
-                <CardDescription>
-                  Complete la información del nuevo alojamiento
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
           <CardContent className="p-6">
             <Tabs value={activeTab} onValueChange={handleTabChange}>
               <TabsList className="grid w-full grid-cols-5 mb-8">
@@ -168,4 +153,3 @@ const AccommodationForm = () => {
 };
 
 export default AccommodationForm;
-

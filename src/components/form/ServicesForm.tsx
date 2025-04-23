@@ -26,7 +26,8 @@ import {
   CalendarDaysIcon, 
   DogIcon, 
   CircleDotIcon,
-  XIcon
+  XIcon,
+  PlusIcon
 } from 'lucide-react';
 
 const ServicesForm = () => {
@@ -52,6 +53,13 @@ const ServicesForm = () => {
   const eventRoomQty = watch('services.eventRoomQty', '2');
   const eventRoomCapacity = watch('services.eventRoomCapacity', '150');
   const observations = watch('services.observations', 'El hotel cuenta con jardines amplios y zona de juegos infantiles. Se recomienda reservar con anticipación durante temporada alta.');
+
+  // Add new state for event rooms
+  const [eventRooms, setEventRooms] = React.useState([{ id: 1 }]);
+
+  const handleAddEventRoom = () => {
+    setEventRooms([...eventRooms, { id: eventRooms.length + 1 }]);
+  };
 
   const handleMultiSelect = (field: string, value: string, currentValues: string[]) => {
     const newValues = currentValues.includes(value)
@@ -428,27 +436,40 @@ const ServicesForm = () => {
           </div>
           
           {eventRoom && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pl-6 pt-2">
-              <div className="form-group">
-                <Label className="form-label">Cantidad de Salones</Label>
-                <Input 
-                  {...register('services.eventRoomQty')}
-                  defaultValue={eventRoomQty}
-                  className="form-input"
-                  type="number"
-                  min="1"
-                />
-              </div>
-              <div className="form-group">
-                <Label className="form-label">Capacidad del salón (personas)</Label>
-                <Input 
-                  {...register('services.eventRoomCapacity')}
-                  defaultValue={eventRoomCapacity}
-                  className="form-input"
-                  type="number"
-                  min="1"
-                />
-              </div>
+            <div className="space-y-4 pl-6 pt-2">
+              {eventRooms.map((room, index) => (
+                <div key={room.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="form-group">
+                    <Label className="form-label">Cantidad de Salones</Label>
+                    <Input 
+                      {...register(`services.eventRoomQty.${index}`)}
+                      className="form-input"
+                      type="number"
+                      min="1"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <Label className="form-label">Capacidad del salón (personas)</Label>
+                    <Input 
+                      {...register(`services.eventRoomCapacity.${index}`)}
+                      className="form-input"
+                      type="number"
+                      min="1"
+                    />
+                  </div>
+                </div>
+              ))}
+              
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleAddEventRoom}
+                className="mt-2"
+              >
+                <PlusIcon className="h-4 w-4 mr-1" />
+                Agregar
+              </Button>
             </div>
           )}
         </div>
