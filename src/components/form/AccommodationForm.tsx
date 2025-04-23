@@ -21,10 +21,15 @@ import GeneralDataForm from './GeneralDataForm';
 import ServicesForm from './ServicesForm';
 import RepatForm from './RepatForm';
 import RatesForm from './RatesForm';
+import { DailySamplesTable } from '../DailySamplesTable';
+import { DailySamplesRegister } from '../DailySamplesRegister';
 import { ClipboardCheckIcon, SaveIcon } from 'lucide-react';
 
 const AccommodationForm = () => {
   const [activeTab, setActiveTab] = useState('general');
+  const [selectedEstablishment, setSelectedEstablishment] = useState<string | null>(null);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  
   const methods = useForm({
     defaultValues: {
       // Default values are set in each component
@@ -49,11 +54,15 @@ const AccommodationForm = () => {
       setActiveTab('rates');
     } else if (activeTab === 'rates') {
       setActiveTab('repat');
+    } else if (activeTab === 'repat') {
+      setActiveTab('samples');
     }
   };
 
   const prevTab = () => {
-    if (activeTab === 'repat') {
+    if (activeTab === 'samples') {
+      setActiveTab('repat');
+    } else if (activeTab === 'repat') {
       setActiveTab('rates');
     } else if (activeTab === 'rates') {
       setActiveTab('services');
@@ -79,11 +88,12 @@ const AccommodationForm = () => {
           </CardHeader>
           <CardContent className="p-6">
             <Tabs value={activeTab} onValueChange={handleTabChange}>
-              <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsList className="grid w-full grid-cols-5 mb-8">
                 <TabsTrigger value="general">Datos Generales</TabsTrigger>
                 <TabsTrigger value="services">Servicios</TabsTrigger>
                 <TabsTrigger value="rates">Tarifas</TabsTrigger>
                 <TabsTrigger value="repat">Repat</TabsTrigger>
+                <TabsTrigger value="samples">Muestras</TabsTrigger>
               </TabsList>
               <TabsContent value="general">
                 <GeneralDataForm />
@@ -96,6 +106,20 @@ const AccommodationForm = () => {
               </TabsContent>
               <TabsContent value="repat">
                 <RepatForm />
+              </TabsContent>
+              <TabsContent value="samples">
+                <div className="space-y-6">
+                  <DailySamplesTable onRegister={(establishment) => {
+                    setSelectedEstablishment(establishment);
+                    setShowRegisterForm(true);
+                  }} />
+                  {showRegisterForm && selectedEstablishment && (
+                    <DailySamplesRegister
+                      establishmentName={selectedEstablishment}
+                      onClose={() => setShowRegisterForm(false)}
+                    />
+                  )}
+                </div>
               </TabsContent>
             </Tabs>
           </CardContent>
@@ -119,7 +143,7 @@ const AccommodationForm = () => {
               >
                 Restablecer
               </Button>
-              {activeTab !== 'repat' ? (
+              {activeTab !== 'samples' ? (
                 <Button 
                   type="button" 
                   onClick={nextTab}
@@ -144,3 +168,4 @@ const AccommodationForm = () => {
 };
 
 export default AccommodationForm;
+
