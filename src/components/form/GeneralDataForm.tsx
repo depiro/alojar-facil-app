@@ -19,8 +19,6 @@ const GeneralDataForm = () => {
       <GeolocationSection />
       <ContactSection />
       <OwnerSection />
-      <StatusSection />
-      <InfractionsSection />
     </div>
   );
 };

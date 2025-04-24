@@ -6,10 +6,12 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
+import  StatusSection  from '@/components/form/sections/StatusSection';
+import InfractionsSection from '@/components/form/sections/InfractionsSection';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { FileIcon, CalendarIcon, BuildingIcon } from 'lucide-react';
+import { FileIcon, CalendarIcon, BuildingIcon, ListIcon } from 'lucide-react';
 
 const LegalDataSection = () => {
   const { register, setValue, watch } = useFormContext();
@@ -26,7 +28,7 @@ const LegalDataSection = () => {
     <div className="space-y-4">
       <h3 className="text-lg font-medium flex items-center gap-2">
         <FileIcon size={18} />
-        Datos legales
+        Registro
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="form-group">
@@ -82,7 +84,10 @@ const LegalDataSection = () => {
           />
         </div>
       </div>
+      <StatusSection />
+      <InfractionsSection />
     </div>
+    
   );
 };
 

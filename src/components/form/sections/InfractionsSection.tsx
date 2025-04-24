@@ -9,16 +9,18 @@ const InfractionsSection = () => {
   const { register } = useFormContext();
 
   return (
-    <div className="form-group">
-      <Label className="form-label flex items-center gap-2">
-        <FileIcon size={16} />
-        Infracciones
-      </Label>
-      <Input 
-        type="file" 
-        {...register('infractions')}
-        className="form-file"
-      />
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+      <div className="form-group">
+        <Label className="form-label flex items-center gap-2">
+          <FileIcon size={16} />
+          Documentación
+        </Label>
+        <Input 
+          type="file" 
+          {...register('infractions')}
+          className="form-file"
+        />
+      </div>
     </div>
   );
 };

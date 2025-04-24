@@ -441,7 +441,7 @@ const ServicesForm = () => {
               {eventRooms.map((room, index) => (
                 <div key={room.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="form-group">
-                    <Label className="form-label">Cantidad de Salones</Label>
+                    <Label className="form-label">Nombre del Salon</Label>
                     <Input 
                       {...register(`services.eventRoomQty.${index}`)}
                       className="form-input"
