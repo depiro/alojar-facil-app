@@ -69,64 +69,73 @@ const GeneralDataForm = () => {
 
   return (
     <div className="space-y-6">
+      {/* Datos legales */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium flex items-center gap-2">
+          <FileIcon size={18} />
+          Datos legales
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Número de legajo */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <FileIcon size={16} />
+              Número de legajo
+            </Label>
+            <Input 
+              {...register('fileNumber')}
+              defaultValue={fileNumber}
+              className="form-input"
+            />
+          </div>
+
+          {/* Fecha de actualización de Legajo */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <CalendarIcon size={16} />
+              Fecha de actualización de Legajo
+            </Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-full justify-start text-left font-normal",
+                    !fileUpdateDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {fileUpdateDate ? format(fileUpdateDate, "PPP", { locale: es }) : "Seleccionar fecha"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={fileUpdateDate}
+                  onSelect={(date) => handleDateSelect('fileUpdateDate', date)}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+
+          {/* Nombre del establecimiento */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <BuildingIcon size={16} />
+              Nombre del establecimiento
+            </Label>
+            <Input 
+              {...register('establishmentName')}
+              defaultValue={establishmentName}
+              className="form-input"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Es complejo turístico */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Número de legajo */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <FileIcon size={16} />
-            Número de legajo
-          </Label>
-          <Input 
-            {...register('fileNumber')}
-            defaultValue={fileNumber}
-            className="form-input"
-          />
-        </div>
-
-        {/* Fecha de actualización de Legajo */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <CalendarIcon size={16} />
-            Fecha de actualización de Legajo
-          </Label>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant={"outline"}
-                className={cn(
-                  "w-full justify-start text-left font-normal",
-                  !fileUpdateDate && "text-muted-foreground"
-                )}
-              >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {fileUpdateDate ? format(fileUpdateDate, "PPP", { locale: es }) : "Seleccionar fecha"}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0">
-              <Calendar
-                mode="single"
-                selected={fileUpdateDate}
-                onSelect={(date) => handleDateSelect('fileUpdateDate', date)}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
-
-        {/* Nombre del establecimiento */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <BuildingIcon size={16} />
-            Nombre del establecimiento
-          </Label>
-          <Input 
-            {...register('establishmentName')}
-            defaultValue={establishmentName}
-            className="form-input"
-          />
-        </div>
-
-        {/* Es complejo turístico */}
         <div className="form-group">
           <Label className="form-label flex items-center gap-2">
             <ToggleRightIcon size={16} />
