@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useFormContext } from "react-hook-form";
 import { Input } from '@/components/ui/input';
@@ -45,7 +44,6 @@ const GeneralDataForm = () => {
   const number = watch('address.number', '1234');
   const floor = watch('address.floor', '');
   const neighborhood = watch('address.neighborhood', 'Centro');
-  const locality = watch('address.locality', 'Villa Carlos Paz');
   const region = watch('address.region', 'Córdoba');
   const geolocation = watch('geolocation', '-31.4201, -64.5004');
   const email = watch('email', 'contacto@hotellassierras.com');
@@ -61,6 +59,9 @@ const GeneralDataForm = () => {
   const isAccessible = watch('isAccessible', true);
   const sample = watch('sample', '2');
   const segment = watch('segment', 'B');
+
+  // Update the locality watch to match the Select
+  const locality = watch('address.locality', '');
 
   const handleDateSelect = (field: string, date: Date | undefined) => {
     setValue(field, date);
@@ -223,12 +224,28 @@ const GeneralDataForm = () => {
           </div>
           <div className="form-group">
             <Label className="form-label">Localidad</Label>
-            <Input 
-              {...register('address.locality')}
-              defaultValue={locality}
-              className="form-input"
-            />
+            <Select 
+              value={locality} 
+              onValueChange={(value) => setValue('address.locality', value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Seleccionar localidad" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Villa Carlos Paz">Villa Carlos Paz</SelectItem>
+                <SelectItem value="Córdoba">Córdoba</SelectItem>
+                <SelectItem value="Villa General Belgrano">Villa General Belgrano</SelectItem>
+                <SelectItem value="La Falda">La Falda</SelectItem>
+                <SelectItem value="Mina Clavero">Mina Clavero</SelectItem>
+                <SelectItem value="Alta Gracia">Alta Gracia</SelectItem>
+                <SelectItem value="Río Cuarto">Río Cuarto</SelectItem>
+                <SelectItem value="San Francisco">San Francisco</SelectItem>
+                <SelectItem value="Villa María">Villa María</SelectItem>
+                <SelectItem value="Otra">Otra</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
+
           <div className="form-group">
             <Label className="form-label">Región</Label>
             <Input 
