@@ -18,7 +18,7 @@ const OwnerSection = () => {
         Titular
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="form-group">
           <Label className="form-label flex items-center gap-2">
             <UserIcon size={16} />
