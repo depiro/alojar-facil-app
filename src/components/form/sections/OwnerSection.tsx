@@ -1,0 +1,42 @@
+
+import React from 'react';
+import { useFormContext } from "react-hook-form";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { UserIcon, BadgeIcon } from 'lucide-react';
+
+const OwnerSection = () => {
+  const { register, watch } = useFormContext();
+
+  const ownerName = watch('ownerName', 'Juan Pérez');
+  const cuit = watch('cuit', '20-12345678-9');
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="form-group">
+        <Label className="form-label flex items-center gap-2">
+          <UserIcon size={16} />
+          Nombre del titular
+        </Label>
+        <Input 
+          {...register('ownerName')}
+          defaultValue={ownerName}
+          className="form-input"
+        />
+      </div>
+      <div className="form-group">
+        <Label className="form-label flex items-center gap-2">
+          <BadgeIcon size={16} />
+          CUIT
+        </Label>
+        <Input 
+          {...register('cuit')}
+          defaultValue={cuit}
+          className="form-input"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default OwnerSection;
