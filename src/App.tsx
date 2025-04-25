@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
-import Samples from "./pages/Samples";
 import React, { Suspense } from "react";
 
 const DailySamples = React.lazy(() => import('./pages/DailySamples'));
@@ -23,7 +22,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/muestras" element={<Samples />} />
+          <Route path="/muestras" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <DailySamples />
+            </Suspense>
+          } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
