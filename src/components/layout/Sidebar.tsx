@@ -75,15 +75,15 @@ const Sidebar = () => {
               />
               <SidebarItem
                 icon={FilePlusIcon}
-                label="Alta Alojamientos"
-                active={activeItem === 'Alta Alojamientos'}
-                onClick={() => handleItemClick('Alta Alojamientos')}
+                label="Nuevo Establecimiento"
+                active={activeItem === 'Nuevo Establecimiento'}
+                onClick={() => handleItemClick('Nuevo Establecimiento')}
               />
               <SidebarItem
                 icon={FileMinusIcon}
-                label="Baja Alojamientos"
-                active={activeItem === 'Baja Alojamientos'}
-                onClick={() => handleItemClick('Baja Alojamientos')}
+                label="Baja Establecimiento"
+                active={activeItem === 'Baja Establecimiento'}
+                onClick={() => handleItemClick('Baja Establecimiento')}
               />
               <SidebarItem
                 icon={ImageIcon}
@@ -91,12 +91,12 @@ const Sidebar = () => {
                 active={activeItem === 'Muestras'}
                 onClick={() => handleItemClick('Muestras')}
               />
-              <SidebarItem
+          {/*     <SidebarItem
                 icon={SettingsIcon}
                 label="Configuración"
                 active={activeItem === 'Configuración'}
                 onClick={() => handleItemClick('Configuración')}
-              />
+              /> */}
             </>
           ) : (
             <>
@@ -114,9 +114,9 @@ const Sidebar = () => {
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
-                  activeItem === 'Alta Alojamientos' && "bg-sidebar-accent text-sidebar-accent-foreground"
+                  activeItem === 'Nuevo Establecimiento' && "bg-sidebar-accent text-sidebar-accent-foreground"
                 )}
-                onClick={() => handleItemClick('Alta Alojamientos')}
+                onClick={() => handleItemClick('Nuevo Establecimiento')}
               >
                 <FilePlusIcon size={18} />
               </Button>
@@ -124,9 +124,9 @@ const Sidebar = () => {
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
-                  activeItem === 'Baja Alojamientos' && "bg-sidebar-accent text-sidebar-accent-foreground"
+                  activeItem === 'Baja Establecimiento' && "bg-sidebar-accent text-sidebar-accent-foreground"
                 )}
-                onClick={() => handleItemClick('Baja Alojamientos')}
+                onClick={() => handleItemClick('Baja Establecimiento')}
               >
                 <FileMinusIcon size={18} />
               </Button>
@@ -140,7 +140,7 @@ const Sidebar = () => {
               >
                 <ImageIcon size={18} />
               </Button>
-              <Button
+             {/*  <Button
                 variant="ghost"
                 className={cn(
                   "h-10 w-10 p-0",
@@ -149,7 +149,7 @@ const Sidebar = () => {
                 onClick={() => handleItemClick('Configuración')}
               >
                 <SettingsIcon size={18} />
-              </Button>
+              </Button> */}
             </>
           )}
         </nav>

@@ -20,13 +20,6 @@ const Index = () => {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/alojamientos">
-                  <Building2Icon className="h-4 w-4 mr-1" />
-                  <span>Alojamientos</span>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
                 <BreadcrumbPage>Nuevo Establecimiento</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
