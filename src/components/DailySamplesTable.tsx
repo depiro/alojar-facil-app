@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -9,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Circle, CircleX, Check } from 'lucide-react';
+import { Circle, CircleX, Check, Search, ListIcon } from 'lucide-react';
 import {
   Pagination,
   PaginationContent,
@@ -19,6 +21,8 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface DailySamplesTableProps {
   onRegister: (establishmentName: string) => void;
@@ -63,6 +67,41 @@ const establishments = [
 export const DailySamplesTable: React.FC<DailySamplesTableProps> = ({ onRegister }) => {
   return (
     <div className="space-y-4">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Buscador</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex gap-4 items-end">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input 
+                  placeholder="Buscar establecimiento..." 
+                  className="pl-8"
+                />
+              </div>
+            </div>
+            <div className="w-[200px]">
+              <Label className="form-label flex items-center gap-2 mb-2">
+                <ListIcon size={16} />
+                Muestra
+              </Label>
+              <Select defaultValue="2">
+                <SelectTrigger className="form-select">
+                  <SelectValue placeholder="Seleccionar muestra"/>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1">1</SelectItem>
+                  <SelectItem value="2">2</SelectItem>
+                  <SelectItem value="3">3</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="rounded-md border">
         <Table>
           <TableHeader>

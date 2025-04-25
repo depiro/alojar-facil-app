@@ -13,7 +13,6 @@ const ClassificationSection = () => {
   const type = watch('type', 'Hotel');
   const category = watch('category', '4 estrellas');
   const isAccessible = watch('isAccessible', true);
-  const sample = watch('sample', '2');
   const segment = watch('segment', 'B');
 
   return (
@@ -70,57 +69,24 @@ const ClassificationSection = () => {
           </SelectContent>
         </Select>
       </div>
-    
-      
-      
-    {/*     <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <ToggleRightIcon size={16} />
-            Accesibilidad
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={isAccessible}
-              onCheckedChange={(checked) => setValue('isAccessible', checked)}
-            />
-            <span>{isAccessible ? 'Accesible' : 'No accesible'}</span>
-          </div>
-        </div> */}
 
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <ListIcon size={16} />
-            Muestra
-          </Label>
-          <Select defaultValue={sample} onValueChange={(value) => setValue('sample', value)}>
-            <SelectTrigger className="form-select">
-              <SelectValue placeholder="Seleccionar muestra"/>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1">1</SelectItem>
-              <SelectItem value="2">2</SelectItem>
-              <SelectItem value="3">3</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <ListIcon size={16} />
-            Segmento
-          </Label>
-          <Select defaultValue={segment} onValueChange={(value) => setValue('segment', value)}>
-            <SelectTrigger className="form-select">
-              <SelectValue placeholder="Seleccionar segmento"/>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="A">A</SelectItem>
-              <SelectItem value="B">B</SelectItem>
-              <SelectItem value="C">C</SelectItem>
-              <SelectItem value="D">D</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="form-group">
+        <Label className="form-label flex items-center gap-2">
+          <ListIcon size={16} />
+          Segmento
+        </Label>
+        <Select defaultValue={segment} onValueChange={(value) => setValue('segment', value)}>
+          <SelectTrigger className="form-select">
+            <SelectValue placeholder="Seleccionar segmento"/>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="A">A</SelectItem>
+            <SelectItem value="B">B</SelectItem>
+            <SelectItem value="C">C</SelectItem>
+            <SelectItem value="D">D</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 };
