@@ -19,9 +19,14 @@ import RepatForm from './RepatForm';
 import RatesForm from './RatesForm';
 import { DailySamplesTable } from '../DailySamplesTable';
 import { DailySamplesRegister } from '../DailySamplesRegister';
-import { ClipboardCheckIcon, SaveIcon } from 'lucide-react';
+import { SaveIcon } from 'lucide-react';
+import { ClipboardCheckIcon } from 'lucide-react';
 
-const AccommodationForm = () => {
+interface AccommodationFormProps {
+  mode?: 'create' | 'edit';
+}
+
+const AccommodationForm = ({ mode = 'create' }: AccommodationFormProps) => {
   const [activeTab, setActiveTab] = useState('general');
   const [selectedEstablishment, setSelectedEstablishment] = useState<string | null>(null);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -34,7 +39,8 @@ const AccommodationForm = () => {
 
   const onSubmit = (data: any) => {
     console.log('Form data submitted:', data);
-    toast.success("Alojamiento creado con éxito", {
+    const message = mode === 'create' ? 'Alojamiento creado con éxito' : 'Alojamiento actualizado con éxito';
+    toast.success(message, {
       description: "Los datos han sido guardados correctamente.",
     });
   };
