@@ -67,41 +67,7 @@ const establishments = [
 export const DailySamplesTable: React.FC<DailySamplesTableProps> = ({ onRegister }) => {
   return (
     <div className="space-y-4">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Buscador</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex gap-4 items-end">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  placeholder="Buscar establecimiento..." 
-                  className="pl-8"
-                />
-              </div>
-            </div>
-            <div className="w-[200px]">
-              <Label className="form-label flex items-center gap-2 mb-2">
-                <ListIcon size={16} />
-                Muestra
-              </Label>
-              <Select defaultValue="2">
-                <SelectTrigger className="form-select">
-                  <SelectValue placeholder="Seleccionar muestra"/>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
+      <h3 className="font-semibold tracking-tight text-lg">Resultados de la búsqueda</h3>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

@@ -46,6 +46,9 @@ const ClassificationSection = () => {
             <SelectItem value="Apart Hotel">Apart Hotel</SelectItem>
             <SelectItem value="Cabaña">Cabaña</SelectItem>
             <SelectItem value="Hostel">Hostel</SelectItem>
+            <SelectItem value="Departamento">Departamento</SelectItem>
+            <SelectItem value="Monoambiente">Monoambiente</SelectItem>
+            <SelectItem value="Casa">Casa</SelectItem>
           </SelectContent>
         </Select>
       </div>
