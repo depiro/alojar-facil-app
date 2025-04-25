@@ -439,16 +439,17 @@ const ServicesForm = () => {
           </div>
           
           {eventRoom && (
-            <div className="space-y-4 pl-6 pt-2">
+            <div className="space-y-4 pl-0 pt-4">
               {eventRooms.map((room, index) => (
                 <div key={room.id} className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                   <div className="form-group">
                     <Label className="form-label">Nombre del Salon</Label>
                     <Input 
-                      {...register(`services.eventRoomQty.${index}`)}
+                      /* {...register(`services.eventRoomQty.${index}`)} */
                       className="form-input"
-                      type="number"
+                      type="text"
                       min="1"
+                      placeholder="Nmbre del salón"
                     />
                   </div>
                   <div className="form-group">

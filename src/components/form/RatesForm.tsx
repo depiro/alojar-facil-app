@@ -14,16 +14,17 @@ interface Rate {
   roomType: string;
   bathroom: string;
   category: string;
+  currency: string;
   price: number;
 }
 
 const initialRates: Rate[] = [
-  { id: 1, roomType: "Habitación Single", bathroom: "Privado", category: "Estándar", price: 35000 },
-  { id: 2, roomType: "Habitación Doble", bathroom: "Privado", category: "Estándar", price: 45000 },
-  { id: 3, roomType: "Habitación Doble", bathroom: "Privado", category: "Superior", price: 55000 },
-  { id: 4, roomType: "Habitación Triple", bathroom: "Privado", category: "Estándar", price: 62000 },
-  { id: 5, roomType: "Habitación Cuádruple", bathroom: "Privado", category: "Estándar", price: 78000 },
-  { id: 6, roomType: "Suite", bathroom: "Privado", category: "Superior", price: 95000 },
+  { id: 1, roomType: "Habitación Single", bathroom: "Privado", category: "Estándar", currency: "USD", price: 35000 },
+  { id: 2, roomType: "Habitación Doble", bathroom: "Privado", category: "Estándar", currency: "USD", price: 45000 },
+  { id: 3, roomType: "Habitación Doble", bathroom: "Privado", category: "Superior", currency: "USD", price: 55000 },
+  { id: 4, roomType: "Habitación Triple", bathroom: "Privado", category: "Estándar", currency: "USD", price: 62000 },
+  { id: 5, roomType: "Habitación Cuádruple", bathroom: "Privado", category: "Estándar", currency: "USD", price: 78000 },
+  { id: 6, roomType: "Suite", bathroom: "Privado", category: "Superior", currency: "USD", price: 95000 },
 ];
 
 
@@ -69,7 +70,8 @@ const RatesForm = () => {
                 <TableHead>Tipo de Habitación</TableHead>
                 <TableHead>Baño</TableHead>
                 <TableHead>Categoría</TableHead>
-                <TableHead>Tarifa (ARS)</TableHead>
+                <TableHead>Moneda</TableHead>
+                <TableHead>Tarifa</TableHead>
                 <TableHead className="w-24">Acciones</TableHead>
               </TableRow>
             </TableHeader>
@@ -79,7 +81,8 @@ const RatesForm = () => {
                   <TableCell>{rate.roomType}</TableCell>
                   <TableCell>{rate.bathroom}</TableCell>
                   <TableCell>{rate.category}</TableCell>
-                  <TableCell>${rate.price.toLocaleString()}</TableCell>
+                  <TableCell>USD</TableCell>
+                  <TableCell>{rate.price.toLocaleString()}</TableCell>
                   <TableCell>
                     <Button 
                       variant="outline" 
