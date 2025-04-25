@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import React, { Suspense } from "react";
 import EditEstablishment from "./pages/EditEstablishment";
+import DetailEstablishment from "./pages/DetailEstablishment";
 
 const DailySamples = React.lazy(() => import('./pages/DailySamples'));
 
@@ -28,6 +29,7 @@ const App = () => (
             </Suspense>
           } />
           <Route path="/establecimientos/editar/:id" element={<EditEstablishment />} />
+          <Route path="/establecimientos/:id" element={<DetailEstablishment />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

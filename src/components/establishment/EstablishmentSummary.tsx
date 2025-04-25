@@ -1,0 +1,119 @@
+
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const EstablishmentSummary = () => {
+  const mockData = {
+    legalData: {
+      fileNumber: "12345",
+      fileUpdateDate: "2024-04-25",
+      enablementDate: "2024-01-01",
+      lastInspectionDate: "2024-03-15"
+    },
+    classification: {
+      type: "Hotel",
+      category: "4 estrellas",
+      isTouristicComplex: false,
+      segment: "B"
+    },
+    services: {
+      pool: true,
+      wifi: true,
+      parking: true,
+      restaurant: true,
+      specialMenus: ["Vegetariano", "Sin TACC"]
+    },
+    contact: {
+      phone: "294-4123456",
+      email: "contacto@hotellassierras.com",
+      website: "www.hotellassierras.com"
+    },
+    location: {
+      address: "Av. Bustillo 1234",
+      city: "San Carlos de Bariloche",
+      region: "Cordillera",
+      postalCode: "8400"
+    }
+  };
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Datos Legales</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <p className="text-sm"><span className="font-medium">Número de legajo:</span> {mockData.legalData.fileNumber}</p>
+          <p className="text-sm"><span className="font-medium">Fecha de actualización:</span> {mockData.legalData.fileUpdateDate}</p>
+          <p className="text-sm"><span className="font-medium">Fecha de habilitación:</span> {mockData.legalData.enablementDate}</p>
+          <p className="text-sm"><span className="font-medium">Última inspección:</span> {mockData.legalData.lastInspectionDate}</p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Clasificación</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <p className="text-sm"><span className="font-medium">Tipo:</span> {mockData.classification.type}</p>
+          <p className="text-sm"><span className="font-medium">Categoría:</span> {mockData.classification.category}</p>
+          <p className="text-sm"><span className="font-medium">Complejo turístico:</span> {mockData.classification.isTouristicComplex ? 'Sí' : 'No'}</p>
+          <p className="text-sm"><span className="font-medium">Segmento:</span> {mockData.classification.segment}</p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Servicios</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(mockData.services).map(([key, value]) => {
+              if (Array.isArray(value)) {
+                return (
+                  <div key={key} className="col-span-2">
+                    <p className="text-sm">
+                      <span className="font-medium">Menús especiales:</span>{' '}
+                      {value.join(', ')}
+                    </p>
+                  </div>
+                );
+              }
+              return (
+                <p key={key} className="text-sm">
+                  <span className="font-medium">{key}:</span>{' '}
+                  {value ? 'Sí' : 'No'}
+                </p>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Contacto</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <p className="text-sm"><span className="font-medium">Teléfono:</span> {mockData.contact.phone}</p>
+          <p className="text-sm"><span className="font-medium">Email:</span> {mockData.contact.email}</p>
+          <p className="text-sm"><span className="font-medium">Sitio web:</span> {mockData.contact.website}</p>
+        </CardContent>
+      </Card>
+
+      <Card className="md:col-span-2">
+        <CardHeader>
+          <CardTitle>Ubicación</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <p className="text-sm"><span className="font-medium">Dirección:</span> {mockData.location.address}</p>
+          <p className="text-sm"><span className="font-medium">Ciudad:</span> {mockData.location.city}</p>
+          <p className="text-sm"><span className="font-medium">Región:</span> {mockData.location.region}</p>
+          <p className="text-sm"><span className="font-medium">Código Postal:</span> {mockData.location.postalCode}</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default EstablishmentSummary;
