@@ -27,11 +27,11 @@ const Index = () => {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Nuevo Alojamiento</BreadcrumbPage>
+                <BreadcrumbPage>Nuevo Establecimiento</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-3xl font-bold mt-2 text-gray-900">Nuevo Alojamiento</h1>
+          <h1 className="text-3xl font-bold mt-2 text-gray-900">Nuevo Establecimiento</h1>
           <p className="text-gray-500 mt-1">
             Complete el formulario para crear un nuevo alojamiento en el sistema
           </p>
