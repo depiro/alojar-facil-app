@@ -73,7 +73,7 @@ const ClassificationSection = () => {
     
       
       
-        <div className="form-group">
+    {/*     <div className="form-group">
           <Label className="form-label flex items-center gap-2">
             <ToggleRightIcon size={16} />
             Accesibilidad
@@ -85,7 +85,7 @@ const ClassificationSection = () => {
             />
             <span>{isAccessible ? 'Accesible' : 'No accesible'}</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="form-group">
           <Label className="form-label flex items-center gap-2">
@@ -100,9 +100,6 @@ const ClassificationSection = () => {
               <SelectItem value="1">1</SelectItem>
               <SelectItem value="2">2</SelectItem>
               <SelectItem value="3">3</SelectItem>
-              <SelectItem value="1W">1W</SelectItem>
-              <SelectItem value="2W">2W</SelectItem>
-              <SelectItem value="3W">3W</SelectItem>
             </SelectContent>
           </Select>
         </div>

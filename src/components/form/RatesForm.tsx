@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Edit2Icon } from 'lucide-react';
+import { CoinsIcon, Edit2Icon, ListIcon } from 'lucide-react';
+import { useFormContext } from "react-hook-form";
 
 interface Rate {
   id: number;
@@ -24,10 +26,16 @@ const initialRates: Rate[] = [
   { id: 6, roomType: "Suite", bathroom: "Privado", category: "Superior", price: 95000 },
 ];
 
+
+
+
 const RatesForm = () => {
   const [rates] = useState<Rate[]>(initialRates);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [selectedRate, setSelectedRate] = useState<Rate | null>(null);
+
+  const { setValue, watch } = useFormContext();
+  const type = watch('type', 'Pesos argentinos');
 
   const handleEdit = (rate: Rate) => {
     setSelectedRate(rate);
@@ -128,12 +136,30 @@ const RatesForm = () => {
                 />
               </div>
             </div>
-            <div className="space-y-2">
-              <Label>Tarifa (ARS)</Label>
-              <Input 
-                type="number"
-                defaultValue={selectedRate?.price}
-              />
+            <div className="grid grid-cols-2 gap-4">
+              
+              <div className="space-y-2">
+                <Label>Moneda</Label>
+                <Select defaultValue={type} onValueChange={(value) => setValue('type', value)}>
+                  <SelectTrigger className="form-select">
+                    <SelectValue placeholder="Seleccionar tipo"/>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Hotel">Dolar</SelectItem>
+                    <SelectItem value="Hostería">Pesos argentinos</SelectItem>
+                    <SelectItem value="Apart Hotel">Euro</SelectItem>
+                    <SelectItem value="Cabaña">Cripto</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Tarifa (ARS)</Label>
+                <Input 
+                  type="number"
+                  defaultValue={selectedRate?.price}
+                />
+              </div>
             </div>
           </div>
           <div className="flex justify-end gap-4">

@@ -28,7 +28,8 @@ import {
   DogIcon, 
   CircleDotIcon,
   XIcon,
-  PlusIcon
+  PlusIcon,
+  ToggleRightIcon
 } from 'lucide-react';
 
 const ServicesForm = () => {
@@ -39,6 +40,7 @@ const ServicesForm = () => {
   const parking = watch('services.parking', []);
   const pool = watch('services.pool', []);
   const recreationalSports = watch('services.recreationalSports', []);
+  const isAccessible = watch('isAccessible', true);
 
   // Watch other values
   const spa = watch('services.spa', false);
@@ -194,6 +196,48 @@ const ServicesForm = () => {
           </div>
         </div>
 
+        {/* Recreativo/Deportivo */}
+        <div className="form-group">
+          <Label className="form-label flex items-center gap-2">
+            <RotateCwIcon size={16} />
+            Recreativo/Deportivo
+          </Label>
+          <div className="space-y-1">
+            <Select
+              onValueChange={(value) => handleMultiSelect('recreationalSports', value, recreationalSports)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Seleccionar opciones" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Cancha de fútbol">Cancha de fútbol</SelectItem>
+                <SelectItem value="Cancha de tenis">Cancha de tenis</SelectItem>
+                <SelectItem value="Cancha de pádel">Cancha de pádel</SelectItem>
+                <SelectItem value="Sala de juegos">Sala de juegos</SelectItem>
+                <SelectItem value="Mesa de ping pong">Mesa de ping pong</SelectItem>
+                <SelectItem value="Mesa de pool">Mesa de pool</SelectItem>
+              </SelectContent>
+            </Select>
+            <div className="flex flex-wrap gap-4">
+              {recreationalSports.map((sport: string) => (
+                <Badge 
+                  key={sport}
+                  variant="secondary"
+                  className="flex items-center gap-1"
+                >
+                  {sport}
+                  <button
+                    onClick={() => handleMultiSelect('recreationalSports', sport, recreationalSports)}
+                    className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+                  >
+                    <XIcon size={14} />
+                  </button>
+                </Badge>
+              ))}
+            </div>            
+          </div>
+        </div>
+
         {/* Spa */}
         <div className="form-group">
           <Label className="form-label flex items-center gap-2">
@@ -284,45 +328,18 @@ const ServicesForm = () => {
           </div>
         </div>
 
-        {/* Recreativo/Deportivo */}
+        {/* Accesibilidad */}
         <div className="form-group">
-          <Label className="form-label flex items-center gap-2 mb-2">
-            <RotateCwIcon size={16} />
-            Recreativo/Deportivo
+          <Label className="form-label flex items-center gap-2">
+            <ToggleRightIcon size={16} />
+            Accesibilidad
           </Label>
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {recreationalSports.map((sport: string) => (
-                <Badge 
-                  key={sport}
-                  variant="secondary"
-                  className="flex items-center gap-1"
-                >
-                  {sport}
-                  <button
-                    onClick={() => handleMultiSelect('recreationalSports', sport, recreationalSports)}
-                    className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
-                  >
-                    <XIcon size={14} />
-                  </button>
-                </Badge>
-              ))}
-            </div>
-            <Select
-              onValueChange={(value) => handleMultiSelect('recreationalSports', value, recreationalSports)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Seleccionar opciones" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Cancha de fútbol">Cancha de fútbol</SelectItem>
-                <SelectItem value="Cancha de tenis">Cancha de tenis</SelectItem>
-                <SelectItem value="Cancha de pádel">Cancha de pádel</SelectItem>
-                <SelectItem value="Sala de juegos">Sala de juegos</SelectItem>
-                <SelectItem value="Mesa de ping pong">Mesa de ping pong</SelectItem>
-                <SelectItem value="Mesa de pool">Mesa de pool</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="flex items-center space-x-2">
+            <Switch
+              checked={isAccessible}
+              onCheckedChange={(checked) => setValue('isAccessible', checked)}
+            />
+            <span>{isAccessible ? 'Accesible' : 'No accesible'}</span>
           </div>
         </div>
 
@@ -439,7 +456,7 @@ const ServicesForm = () => {
           {eventRoom && (
             <div className="space-y-4 pl-6 pt-2">
               {eventRooms.map((room, index) => (
-                <div key={room.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div key={room.id} className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                   <div className="form-group">
                     <Label className="form-label">Nombre del Salon</Label>
                     <Input 
