@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useFormContext } from "react-hook-form";
 import { Label } from '@/components/ui/label';
@@ -12,7 +13,6 @@ import {
   SelectValue 
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { 
   CreditCardIcon, 
@@ -40,6 +40,7 @@ const ServicesForm = () => {
   const parking = watch('services.parking', []);
   const pool = watch('services.pool', []);
   const recreationalSports = watch('services.recreationalSports', []);
+  const specialMenus = watch('services.specialMenus', []);
   const isAccessible = watch('isAccessible', true);
 
   // Watch other values
@@ -51,7 +52,6 @@ const ServicesForm = () => {
   const petsAllowed = watch('services.petsAllowed', true);
   const cafeteriaBar = watch('services.cafeteriaBar', true);
   const restaurant = watch('services.restaurant', true);
-  const specialMenus = watch('services.specialMenus', ['Celíacos', 'Vegetarianos']);
   const eventRoom = watch('services.eventRoom', true);
   const eventRoomQty = watch('services.eventRoomQty', '2');
   const eventRoomCapacity = watch('services.eventRoomCapacity', '150');
@@ -73,367 +73,352 @@ const ServicesForm = () => {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Tarjetas */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2 mb-2">
-            <CreditCardIcon size={16} />
-            Tarjetas
-          </Label>
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {cards.map((card: string) => (
-                <Badge 
-                  key={card}
-                  variant="secondary"
-                  className="flex items-center gap-1"
-                >
-                  {card}
-                  <button
-                    onClick={() => handleMultiSelect('cards', card, cards)}
-                    className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+      {/* MultiSelect Group */}
+      <div className="space-y-6 p-6 border rounded-lg bg-card">
+        <h3 className="text-lg font-medium">Servicios Múltiples</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Tarjetas */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2 mb-2">
+              <CreditCardIcon size={16} />
+              Tarjetas
+            </Label>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {cards.map((card: string) => (
+                  <Badge 
+                    key={card}
+                    variant="secondary"
+                    className="flex items-center gap-1"
                   >
-                    <XIcon size={14} />
-                  </button>
-                </Badge>
-              ))}
+                    {card}
+                    <button
+                      onClick={() => handleMultiSelect('cards', card, cards)}
+                      className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+                    >
+                      <XIcon size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <Select
+                onValueChange={(value) => handleMultiSelect('cards', value, cards)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar opciones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Débito">Débito</SelectItem>
+                  <SelectItem value="Crédito">Crédito</SelectItem>
+                  <SelectItem value="American Express">American Express</SelectItem>
+                  <SelectItem value="Mastercard">Mastercard</SelectItem>
+                  <SelectItem value="Visa">Visa</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <Select
-              onValueChange={(value) => handleMultiSelect('cards', value, cards)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Seleccionar opciones" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Débito">Débito</SelectItem>
-                <SelectItem value="Crédito">Crédito</SelectItem>
-                <SelectItem value="American Express">American Express</SelectItem>
-                <SelectItem value="Mastercard">Mastercard</SelectItem>
-                <SelectItem value="Visa">Visa</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
-        </div>
 
-        {/* Cochera */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2 mb-2">
-            <CarIcon size={16} />
-            Cochera
-          </Label>
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {parking.map((type: string) => (
-                <Badge 
-                  key={type}
-                  variant="secondary"
-                  className="flex items-center gap-1"
-                >
-                  {type}
-                  <button
-                    onClick={() => handleMultiSelect('parking', type, parking)}
-                    className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+          {/* Cochera */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2 mb-2">
+              <CarIcon size={16} />
+              Cochera
+            </Label>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {parking.map((type: string) => (
+                  <Badge 
+                    key={type}
+                    variant="secondary"
+                    className="flex items-center gap-1"
                   >
-                    <XIcon size={14} />
-                  </button>
-                </Badge>
-              ))}
+                    {type}
+                    <button
+                      onClick={() => handleMultiSelect('parking', type, parking)}
+                      className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+                    >
+                      <XIcon size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <Select
+                onValueChange={(value) => handleMultiSelect('parking', value, parking)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar opciones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Techada">Techada</SelectItem>
+                  <SelectItem value="Playa de estacionamiento">Playa de estacionamiento</SelectItem>
+                  <SelectItem value="Cubierta">Cubierta</SelectItem>
+                  <SelectItem value="Con seguridad">Con seguridad</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <Select
-              onValueChange={(value) => handleMultiSelect('parking', value, parking)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Seleccionar opciones" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Techada">Techada</SelectItem>
-                <SelectItem value="Playa de estacionamiento">Playa de estacionamiento</SelectItem>
-                <SelectItem value="Cubierta">Cubierta</SelectItem>
-                <SelectItem value="Con seguridad">Con seguridad</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
-        </div>
 
-        {/* Piscina */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2 mb-2">
-            <Bath size={16} />
-            Piscina
-          </Label>
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {pool.map((type: string) => (
-                <Badge 
-                  key={type}
-                  variant="secondary"
-                  className="flex items-center gap-1"
-                >
-                  {type}
-                  <button
-                    onClick={() => handleMultiSelect('pool', type, pool)}
-                    className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+          {/* Piscina */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2 mb-2">
+              <Bath size={16} />
+              Piscina
+            </Label>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {pool.map((type: string) => (
+                  <Badge 
+                    key={type}
+                    variant="secondary"
+                    className="flex items-center gap-1"
                   >
-                    <XIcon size={14} />
-                  </button>
-                </Badge>
-              ))}
+                    {type}
+                    <button
+                      onClick={() => handleMultiSelect('pool', type, pool)}
+                      className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+                    >
+                      <XIcon size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <Select
+                onValueChange={(value) => handleMultiSelect('pool', value, pool)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar opciones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Climatizada">Climatizada</SelectItem>
+                  <SelectItem value="Techada">Techada</SelectItem>
+                  <SelectItem value="Al aire libre">Al aire libre</SelectItem>
+                  <SelectItem value="Con solarium">Con solarium</SelectItem>
+                  <SelectItem value="Con guardavidas">Con guardavidas</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <Select
-              onValueChange={(value) => handleMultiSelect('pool', value, pool)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Seleccionar opciones" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Climatizada">Climatizada</SelectItem>
-                <SelectItem value="Techada">Techada</SelectItem>
-                <SelectItem value="Al aire libre">Al aire libre</SelectItem>
-                <SelectItem value="Con solarium">Con solarium</SelectItem>
-                <SelectItem value="Con guardavidas">Con guardavidas</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
-        </div>
 
-        {/* Recreativo/Deportivo */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <RotateCwIcon size={16} />
-            Recreativo/Deportivo
-          </Label>
-          <div className="space-y-1">
-            <Select
-              onValueChange={(value) => handleMultiSelect('recreationalSports', value, recreationalSports)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Seleccionar opciones" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Cancha de fútbol">Cancha de fútbol</SelectItem>
-                <SelectItem value="Cancha de tenis">Cancha de tenis</SelectItem>
-                <SelectItem value="Cancha de pádel">Cancha de pádel</SelectItem>
-                <SelectItem value="Sala de juegos">Sala de juegos</SelectItem>
-                <SelectItem value="Mesa de ping pong">Mesa de ping pong</SelectItem>
-                <SelectItem value="Mesa de pool">Mesa de pool</SelectItem>
-              </SelectContent>
-            </Select>
-            <div className="flex flex-wrap gap-4">
-              {recreationalSports.map((sport: string) => (
-                <Badge 
-                  key={sport}
-                  variant="secondary"
-                  className="flex items-center gap-1"
-                >
-                  {sport}
-                  <button
-                    onClick={() => handleMultiSelect('recreationalSports', sport, recreationalSports)}
-                    className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+          {/* Recreativo/Deportivo */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <RotateCwIcon size={16} />
+              Recreativo/Deportivo
+            </Label>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {recreationalSports.map((sport: string) => (
+                  <Badge 
+                    key={sport}
+                    variant="secondary"
+                    className="flex items-center gap-1"
                   >
-                    <XIcon size={14} />
-                  </button>
-                </Badge>
-              ))}
-            </div>            
+                    {sport}
+                    <button
+                      onClick={() => handleMultiSelect('recreationalSports', sport, recreationalSports)}
+                      className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+                    >
+                      <XIcon size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <Select
+                onValueChange={(value) => handleMultiSelect('recreationalSports', value, recreationalSports)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar opciones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Cancha de fútbol">Cancha de fútbol</SelectItem>
+                  <SelectItem value="Cancha de tenis">Cancha de tenis</SelectItem>
+                  <SelectItem value="Cancha de pádel">Cancha de pádel</SelectItem>
+                  <SelectItem value="Sala de juegos">Sala de juegos</SelectItem>
+                  <SelectItem value="Mesa de ping pong">Mesa de ping pong</SelectItem>
+                  <SelectItem value="Mesa de pool">Mesa de pool</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-        </div>
 
-        {/* Spa */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <HeartPulseIcon size={16} />
-            Spa
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={spa}
-              onCheckedChange={(checked) => setValue('services.spa', checked)}
-            />
-            <span>{spa ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* Gimnasio */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <DumbbellIcon size={16} />
-            Gimnasio
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={gym}
-              onCheckedChange={(checked) => setValue('services.gym', checked)}
-            />
-            <span>{gym ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* WiFi */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <WifiIcon size={16} />
-            WiFi
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={wifi}
-              onCheckedChange={(checked) => setValue('services.wifi', checked)}
-            />
-            <span>{wifi ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* Desayuno */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <CoffeeIcon size={16} />
-            Desayuno
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={breakfast}
-              onCheckedChange={(checked) => setValue('services.breakfast', checked)}
-            />
-            <span>{breakfast ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* Casino */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <CircleDotIcon size={16} />
-            Casino
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={casino}
-              onCheckedChange={(checked) => setValue('services.casino', checked)}
-            />
-            <span>{casino ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* Admite mascotas */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <DogIcon size={16} />
-            Admite mascotas
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={petsAllowed}
-              onCheckedChange={(checked) => setValue('services.petsAllowed', checked)}
-            />
-            <span>{petsAllowed ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* Accesibilidad */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <ToggleRightIcon size={16} />
-            Accesibilidad
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={isAccessible}
-              onCheckedChange={(checked) => setValue('isAccessible', checked)}
-            />
-            <span>{isAccessible ? 'Accesible' : 'No accesible'}</span>
-          </div>
-        </div>
-
-        {/* Cafetería/Bar/Snackbar */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <CoffeeIcon size={16} />
-            Cafetería/Bar/Snackbar
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={cafeteriaBar}
-              onCheckedChange={(checked) => setValue('services.cafeteriaBar', checked)}
-            />
-            <span>{cafeteriaBar ? 'Sí' : 'No'}</span>
-          </div>
-        </div>
-
-        {/* Restaurante */}
-        <div className="form-group">
-          <Label className="form-label flex items-center gap-2">
-            <UtensilsIcon size={16} />
-            Restaurante
-          </Label>
-          <div className="flex items-center space-x-2">
-            <Switch
-              checked={restaurant}
-              onCheckedChange={(checked) => setValue('services.restaurant', checked)}
-            />
-            <span>{restaurant ? 'Sí' : 'No'}</span>
+          {/* Menús especiales */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <UtensilsIcon size={16} />
+              Menús especiales
+            </Label>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {specialMenus.map((menu: string) => (
+                  <Badge 
+                    key={menu}
+                    variant="secondary"
+                    className="flex items-center gap-1"
+                  >
+                    {menu}
+                    <button
+                      onClick={() => handleMultiSelect('specialMenus', menu, specialMenus)}
+                      className="ml-1 hover:bg-gray-200 rounded-full p-0.5"
+                    >
+                      <XIcon size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <Select
+                onValueChange={(value) => handleMultiSelect('specialMenus', value, specialMenus)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar opciones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Celíacos">Celíacos</SelectItem>
+                  <SelectItem value="Veganos">Veganos</SelectItem>
+                  <SelectItem value="Vegetarianos">Vegetarianos</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Menús especiales */}
-      <div className="form-group">
-        <Label className="form-label flex items-center gap-2">
-          <UtensilsIcon size={16} />
-          Menús especiales
-        </Label>
-        <div className="flex items-center space-x-8">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="menu-celiacos"
-              checked={specialMenus?.includes('Celíacos')}
-              onCheckedChange={(checked) => {
-                const current = specialMenus || [];
-                if (checked) {
-                  setValue('services.specialMenus', [...current, 'Celíacos']);
-                } else {
-                  setValue(
-                    'services.specialMenus',
-                    current.filter((item) => item !== 'Celíacos')
-                  );
-                }
-              }}
-            />
-            <Label htmlFor="menu-celiacos" className="cursor-pointer">Celíacos</Label>
+      {/* Switches Group */}
+      <div className="space-y-6 p-6 border rounded-lg bg-card">
+        <h3 className="text-lg font-medium">Servicios Básicos</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {/* Spa */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <HeartPulseIcon size={16} />
+              Spa
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={spa}
+                onCheckedChange={(checked) => setValue('services.spa', checked)}
+              />
+              <span>{spa ? 'Sí' : 'No'}</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="menu-veganos"
-              checked={specialMenus?.includes('Veganos')}
-              onCheckedChange={(checked) => {
-                const current = specialMenus || [];
-                if (checked) {
-                  setValue('services.specialMenus', [...current, 'Veganos']);
-                } else {
-                  setValue(
-                    'services.specialMenus',
-                    current.filter((item) => item !== 'Veganos')
-                  );
-                }
-              }}
-            />
-            <Label htmlFor="menu-veganos" className="cursor-pointer">Veganos</Label>
+
+          {/* Gimnasio */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <DumbbellIcon size={16} />
+              Gimnasio
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={gym}
+                onCheckedChange={(checked) => setValue('services.gym', checked)}
+              />
+              <span>{gym ? 'Sí' : 'No'}</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="menu-vegetarianos"
-              checked={specialMenus?.includes('Vegetarianos')}
-              onCheckedChange={(checked) => {
-                const current = specialMenus || [];
-                if (checked) {
-                  setValue('services.specialMenus', [...current, 'Vegetarianos']);
-                } else {
-                  setValue(
-                    'services.specialMenus',
-                    current.filter((item) => item !== 'Vegetarianos')
-                  );
-                }
-              }}
-            />
-            <Label htmlFor="menu-vegetarianos" className="cursor-pointer">Vegetarianos</Label>
+
+          {/* WiFi */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <WifiIcon size={16} />
+              WiFi
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={wifi}
+                onCheckedChange={(checked) => setValue('services.wifi', checked)}
+              />
+              <span>{wifi ? 'Sí' : 'No'}</span>
+            </div>
+          </div>
+
+          {/* Desayuno */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <CoffeeIcon size={16} />
+              Desayuno
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={breakfast}
+                onCheckedChange={(checked) => setValue('services.breakfast', checked)}
+              />
+              <span>{breakfast ? 'Sí' : 'No'}</span>
+            </div>
+          </div>
+
+          {/* Casino */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <CircleDotIcon size={16} />
+              Casino
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={casino}
+                onCheckedChange={(checked) => setValue('services.casino', checked)}
+              />
+              <span>{casino ? 'Sí' : 'No'}</span>
+            </div>
+          </div>
+
+          {/* Admite mascotas */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <DogIcon size={16} />
+              Admite mascotas
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={petsAllowed}
+                onCheckedChange={(checked) => setValue('services.petsAllowed', checked)}
+              />
+              <span>{petsAllowed ? 'Sí' : 'No'}</span>
+            </div>
+          </div>
+
+          {/* Accesibilidad */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <ToggleRightIcon size={16} />
+              Accesibilidad
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={isAccessible}
+                onCheckedChange={(checked) => setValue('isAccessible', checked)}
+              />
+              <span>{isAccessible ? 'Accesible' : 'No accesible'}</span>
+            </div>
+          </div>
+
+          {/* Cafetería/Bar/Snackbar */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <CoffeeIcon size={16} />
+              Cafetería/Bar/Snackbar
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={cafeteriaBar}
+                onCheckedChange={(checked) => setValue('services.cafeteriaBar', checked)}
+              />
+              <span>{cafeteriaBar ? 'Sí' : 'No'}</span>
+            </div>
+          </div>
+
+          {/* Restaurante */}
+          <div className="form-group">
+            <Label className="form-label flex items-center gap-2">
+              <UtensilsIcon size={16} />
+              Restaurante
+            </Label>
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={restaurant}
+                onCheckedChange={(checked) => setValue('services.restaurant', checked)}
+              />
+              <span>{restaurant ? 'Sí' : 'No'}</span>
+            </div>
           </div>
         </div>
       </div>
