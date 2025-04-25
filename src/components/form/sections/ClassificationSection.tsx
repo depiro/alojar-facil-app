@@ -2,6 +2,7 @@
 import React from 'react';
 import { useFormContext } from "react-hook-form";
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { ToggleRightIcon, ListIcon } from 'lucide-react';
@@ -13,10 +14,9 @@ const ClassificationSection = () => {
   const type = watch('type', 'Hotel');
   const category = watch('category', '4 estrellas');
   const isAccessible = watch('isAccessible', true);
-  const segment = watch('segment', 'B');
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       <div className="form-group">
         <Label className="form-label flex items-center gap-2">
           <ToggleRightIcon size={16} />
@@ -72,20 +72,13 @@ const ClassificationSection = () => {
 
       <div className="form-group">
         <Label className="form-label flex items-center gap-2">
-          <ListIcon size={16} />
-          Segmento
-        </Label>
-        <Select defaultValue={segment} onValueChange={(value) => setValue('segment', value)}>
-          <SelectTrigger className="form-select">
-            <SelectValue placeholder="Seleccionar segmento"/>
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="A">A</SelectItem>
-            <SelectItem value="B">B</SelectItem>
-            <SelectItem value="C">C</SelectItem>
-            <SelectItem value="D">D</SelectItem>
-          </SelectContent>
-        </Select>
+          <ListIcon size={16} />Segmento</Label>
+          <Input 
+            className="form-input bg-gray-100"
+            defaultValue="B"
+            disabled
+          />
+
       </div>
     </div>
   );
