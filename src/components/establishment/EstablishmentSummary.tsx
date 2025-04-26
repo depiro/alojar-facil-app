@@ -6,7 +6,7 @@ import {
   MapPin, 
   Phone, 
   Star, 
-  Pool,
+  Waves,  // Replace Pool with Waves
   Wifi,
   ParkingCircle,
   UtensilsCrossed,
@@ -90,7 +90,7 @@ const EstablishmentSummary = () => {
         <CardContent>
           <div className="grid grid-cols-2 gap-2">
             <p className="text-sm flex items-center gap-2">
-              <Pool className="h-4 w-4" />
+              <Waves className="h-4 w-4" />  {/* Replace Pool with Waves */}
               <span className="font-medium">Piscina:</span> {mockData.services.pool ? 'Sí' : 'No'}
             </p>
             <p className="text-sm flex items-center gap-2">
