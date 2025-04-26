@@ -28,8 +28,8 @@ const EstablishmentHeader = () => {
   const mockData = {
     name: "Hotel Las Sierras",
     category: "4 estrellas",
-    location: "San Carlos de Bariloche",
-    region: "Cordillera",
+    location: "Abra Pampa",
+    region: "Puna",
     status: "Activo"
   };
 

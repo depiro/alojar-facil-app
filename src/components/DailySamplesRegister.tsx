@@ -59,13 +59,36 @@ export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
       date.id === id ? { ...date, [field]: value } : date
     ));
   };
-
+  const mockData = {
+    name: "Hotel Las Sierras",
+    category: "4 estrellas",
+    location: "Abra Pampa",
+    region: "Puna",
+    status: "Activo"
+  };
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-xl text-primary">
-            Registrar Información de "{establishmentName}"
+          <DialogTitle className="text-xl">
+            <div className="space-y-2">
+              <h1 className="text-2xl font-bold text-gray-900">Registrar Información de "{establishmentName}"</h1>
+          
+              <div className="space-y-1">
+                <p className="text-sm text-gray-500">
+                  <span className="font-medium">Localidad:</span> {mockData.location}
+                </p>
+                <p className="text-sm text-gray-500">
+                  <span className="font-medium">Región:</span> {mockData.region}
+                </p>
+                <p className="text-sm text-gray-500">
+                  <span className="font-medium">Estado:</span>{' '}
+                  <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-green-100 text-green-700">
+                    {mockData.status}
+                  </span>
+                </p>
+              </div>
+            </div>
           </DialogTitle>
         </DialogHeader>
 
@@ -85,7 +108,7 @@ export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
             </div>
 
             <div className="space-y-2">
-              <Label>Fecha de registro *</Label>
+              <Label>Fecha de muestra *</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -119,7 +142,7 @@ export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="occupiedRooms">Habitaciones ocupadas anoche *</Label>
+              <Label htmlFor="occupiedRooms">Habitaciones ocupadas *</Label>
               <Input type="number" placeholder="Ej. 8" />
             </div>
 
@@ -142,9 +165,9 @@ export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
                 Agregar
               </Button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-col-2 gap-4">
               {specialDates.map((specialDate) => (
-                <div key={specialDate.id} className="space-y-2 flex gap-4">
+                <div key={specialDate.id} className="space-y-0 flex gap-4">
                   <div className="flex-1">
                     <Popover>
                       <PopoverTrigger asChild>

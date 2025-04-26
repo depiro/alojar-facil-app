@@ -51,12 +51,38 @@ const DeactivationDialog = ({ open, onOpenChange, onConfirm }: DeactivationDialo
     const file = event.target.files?.[0] || null;
     setDocument(file);
   };
-
+  const mockData = {
+    name: "Hotel Las Sierras",
+    category: "4 estrellas",
+    location: "Abra Pampa",
+    region: "Puna",
+    status: "Activo"
+  };
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="sm:max-w-[425px]">
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirmar baja del establecimiento</AlertDialogTitle>
+          
+          <AlertDialogTitle className="text-xl">
+            <div className="space-y-2">
+              {/* <h1 className="text-2xl font-bold text-gray-900">Registrar Información de "{establishmentName}"</h1> */}
+              <h1 className="text-2xl font-bold text-gray-900">Baja de {mockData.name}</h1>
+              <div className="space-y-1">
+                <p className="text-sm text-gray-500">
+                  <span className="font-medium">Localidad:</span> {mockData.location}
+                </p>
+                <p className="text-sm text-gray-500">
+                  <span className="font-medium">Región:</span> {mockData.region}
+                </p>
+                <p className="text-sm text-gray-500">
+                  <span className="font-medium">Estado:</span>{' '}
+                  <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-green-100 text-green-700">
+                    {mockData.status}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </AlertDialogTitle>
           <AlertDialogDescription>
             Esta acción dará de baja al establecimiento. Por favor, complete la siguiente información.
           </AlertDialogDescription>
