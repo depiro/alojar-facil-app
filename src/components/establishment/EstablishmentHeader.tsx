@@ -1,11 +1,30 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Edit, Trash2, Printer, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import DeactivationDialog from './DeactivationDialog';
+import { useToast } from "@/hooks/use-toast";
 
 const EstablishmentHeader = () => {
+  const [showDeactivationDialog, setShowDeactivationDialog] = useState(false);
+  const { toast } = useToast();
+
+  const handleDeactivation = (data: {
+    comments: string;
+    date: Date;
+    document: File | null;
+  }) => {
+    // Here you would handle the deactivation logic
+    console.log('Deactivation data:', data);
+    toast({
+      title: "Establecimiento dado de baja",
+      description: "El establecimiento ha sido dado de baja exitosamente.",
+    });
+    setShowDeactivationDialog(false);
+  };
+
   const mockData = {
     name: "Hotel Las Sierras",
     category: "4 estrellas",
@@ -39,7 +58,11 @@ const EstablishmentHeader = () => {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Button variant="destructive" size="sm">
+          <Button 
+            variant="destructive" 
+            size="sm"
+            onClick={() => setShowDeactivationDialog(true)}
+          >
             <Trash2 className="h-4 w-4 mr-2" />
             Baja
           </Button>
@@ -59,6 +82,12 @@ const EstablishmentHeader = () => {
           </Button>
         </div>
       </div>
+
+      <DeactivationDialog
+        open={showDeactivationDialog}
+        onOpenChange={setShowDeactivationDialog}
+        onConfirm={handleDeactivation}
+      />
     </Card>
   );
 };
