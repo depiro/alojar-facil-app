@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Select,
   SelectContent,
@@ -16,18 +17,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus } from 'lucide-react';
+import { format } from "date-fns";
+import { CalendarIcon, Plus } from 'lucide-react';
+import { cn } from "@/lib/utils";
 
 interface DailySamplesRegisterProps {
   establishmentName: string;
   onClose: () => void;
 }
 
+interface SpecialDate {
+  id: number;
+  date: Date;
+  availability: string;
+}
+
 export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
   establishmentName,
   onClose,
 }) => {
+  const [registrationDate, setRegistrationDate] = useState<Date>(new Date());
+  const [specialDates, setSpecialDates] = useState<SpecialDate[]>([]);
+
+  const handleAddSpecialDate = () => {
+    const newSpecialDate: SpecialDate = {
+      id: Date.now(),
+      date: new Date(),
+      availability: ''
+    };
+    setSpecialDates([...specialDates, newSpecialDate]);
+  };
+
+  const handleSpecialDateChange = (id: number, field: keyof SpecialDate, value: any) => {
+    setSpecialDates(specialDates.map(date => 
+      date.id === id ? { ...date, [field]: value } : date
+    ));
+  };
+
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
@@ -53,16 +85,30 @@ export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="contactMethod">Método de Contacto *</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Llamada telefónica" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="phone">Llamada telefónica</SelectItem>
-                  <SelectItem value="email">Correo electrónico</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label>Fecha de registro *</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !registrationDate && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {registrationDate ? format(registrationDate, "PPP") : <span>Seleccione una fecha</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={registrationDate}
+                    onSelect={(date) => date && setRegistrationDate(date)}
+                    initialFocus
+                    className={cn("p-3 pointer-events-auto")}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
 
@@ -86,24 +132,53 @@ export const DailySamplesRegister: React.FC<DailySamplesRegisterProps> = ({
           <div>
             <div className="flex items-center justify-between mb-2">
               <Label>Fechas especiales</Label>
-              <Button variant="outline" size="sm" className="gap-1">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1"
+                onClick={handleAddSpecialDate}
+              >
                 <Plus className="h-4 w-4" />
                 Agregar
               </Button>
             </div>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label>Jueves Santo (17/04)</Label>
-                <Input placeholder="Reservas / Disponibilidad" />
-              </div>
-              <div className="space-y-2">
-                <Label>Viernes Santo (18/04)</Label>
-                <Input placeholder="Reservas / Disponibilidad" />
-              </div>
-              <div className="space-y-2">
-                <Label>Sábado Santo (19/04)</Label>
-                <Input placeholder="Reservas / Disponibilidad" />
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+              {specialDates.map((specialDate) => (
+                <div key={specialDate.id} className="space-y-2 flex gap-4">
+                  <div className="flex-1">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !specialDate.date && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {specialDate.date ? format(specialDate.date, "PPP") : <span>Seleccione una fecha</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={specialDate.date}
+                          onSelect={(date) => date && handleSpecialDateChange(specialDate.id, 'date', date)}
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  <div className="flex-1">
+                    <Input 
+                      placeholder="Reservas / Disponibilidad"
+                      value={specialDate.availability}
+                      onChange={(e) => handleSpecialDateChange(specialDate.id, 'availability', e.target.value)}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
