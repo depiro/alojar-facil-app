@@ -1,6 +1,18 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  Building2, 
+  MapPin, 
+  Phone, 
+  Star, 
+  Pool,
+  Wifi,
+  ParkingCircle,
+  UtensilsCrossed,
+  FileText,
+  Calendar 
+} from 'lucide-react';
 
 const EstablishmentSummary = () => {
   const mockData = {
@@ -40,7 +52,10 @@ const EstablishmentSummary = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>Datos Legales</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5" />
+            Datos Legales
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-sm"><span className="font-medium">Número de legajo:</span> {mockData.legalData.fileNumber}</p>
@@ -52,7 +67,10 @@ const EstablishmentSummary = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Clasificación</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Building2 className="h-5 w-5" />
+            Clasificación
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-sm"><span className="font-medium">Tipo:</span> {mockData.classification.type}</p>
@@ -64,35 +82,45 @@ const EstablishmentSummary = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Servicios</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Star className="h-5 w-5" />
+            Servicios
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-2">
-            {Object.entries(mockData.services).map(([key, value]) => {
-              if (Array.isArray(value)) {
-                return (
-                  <div key={key} className="col-span-2">
-                    <p className="text-sm">
-                      <span className="font-medium">Menús especiales:</span>{' '}
-                      {value.join(', ')}
-                    </p>
-                  </div>
-                );
-              }
-              return (
-                <p key={key} className="text-sm">
-                  <span className="font-medium">{key}:</span>{' '}
-                  {value ? 'Sí' : 'No'}
-                </p>
-              );
-            })}
+            <p className="text-sm flex items-center gap-2">
+              <Pool className="h-4 w-4" />
+              <span className="font-medium">Piscina:</span> {mockData.services.pool ? 'Sí' : 'No'}
+            </p>
+            <p className="text-sm flex items-center gap-2">
+              <Wifi className="h-4 w-4" />
+              <span className="font-medium">WiFi:</span> {mockData.services.wifi ? 'Sí' : 'No'}
+            </p>
+            <p className="text-sm flex items-center gap-2">
+              <ParkingCircle className="h-4 w-4" />
+              <span className="font-medium">Estacionamiento:</span> {mockData.services.parking ? 'Sí' : 'No'}
+            </p>
+            <p className="text-sm flex items-center gap-2">
+              <UtensilsCrossed className="h-4 w-4" />
+              <span className="font-medium">Restaurante:</span> {mockData.services.restaurant ? 'Sí' : 'No'}
+            </p>
+            <div className="col-span-2">
+              <p className="text-sm">
+                <span className="font-medium">Menús especiales:</span>{' '}
+                {mockData.services.specialMenus.join(', ')}
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle>Contacto</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Phone className="h-5 w-5" />
+            Contacto
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-sm"><span className="font-medium">Teléfono:</span> {mockData.contact.phone}</p>
@@ -103,7 +131,10 @@ const EstablishmentSummary = () => {
 
       <Card className="md:col-span-2">
         <CardHeader>
-          <CardTitle>Ubicación</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <MapPin className="h-5 w-5" />
+            Ubicación
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-sm"><span className="font-medium">Dirección:</span> {mockData.location.address}</p>
