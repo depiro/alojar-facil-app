@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Edit, Trash2, Printer, FileExport } from 'lucide-react';
+import { Edit, Trash2, Printer, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const EstablishmentHeader = () => {
@@ -54,7 +54,7 @@ const EstablishmentHeader = () => {
             Imprimir
           </Button>
           <Button variant="outline" size="sm">
-            <FileExport className="h-4 w-4 mr-2" />
+            <FileText className="h-4 w-4 mr-2" />
             Exportar
           </Button>
         </div>
